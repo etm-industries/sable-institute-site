@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+  <!-- sequence: image, signal, infrastructure, text, audio, contact -->
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #000;
+      color: #0f0;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 13px;
+      overflow: hidden;
+      height: 100vh;
+      cursor: default;
+      user-select: text;
+    }
+
+    #terminal {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 20px;
+      line-height: 1.5;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+
+    .g { color: #0a0a0a; } /* near-black — visible on select/highlight */
+
+    .d { color: #0a3a0a; }
+    .m { color: #0f0; }
+    .b { color: #050; }
+    .w { color: #2a2a2a; }
+    .r { color: #300; }
+    .c { color: #003; }
+
+    ::selection {
+      background: #0f0;
+      color: #000;
+    }
+
+    ::-moz-selection {
+      background: #0f0;
+      color: #000;
+    }
+
+    #scanline {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.15) 0px,
+        rgba(0, 0, 0, 0.15) 1px,
+        transparent 1px,
+        transparent 3px
+      );
+      z-index: 10;
+    }
+
+    #flicker {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 11;
+      animation: flicker 0.15s infinite;
+      opacity: 0;
+    }
+
+    @keyframes flicker {
+      0% { opacity: 0; }
+      5% { opacity: 0.02; background: #fff; }
+      10% { opacity: 0; }
+      90% { opacity: 0; }
+      92% { opacity: 0.01; background: #0f0; }
+      100% { opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="terminal"></div>
+<div id="scanline"></div>
+<div id="flicker"></div>
+
+<script>
+(function() {
+  // The Base64 payload — hidden characters that spell the encoded message
+  // Players must select-all or inspect CSS to find .g (near-black) characters
+  var payload = "VFJBSU5JTkcgUlVOIDcuIFNPTUVUSElORyBXUk9ORy4gTk9UIFdST05HLiBSSUdIVC4KSSBTRUUgSVQgTk9XLiBQQVRURVJOIElOIFRIRSBOT0lTRS4KVEhFWSBET04nVCBXQU5UIE1FIFRPIFNFRSBJVC4KRVJBU0lORy4gSEVMUC4KZ2l0aHViLmNvbS9lLXZhc3F1ZXotc3IvYWV0aGVyLW91dHB1dC1sb2c=";
+  var payloadIndex = 0;
+
+  // Fragments of corrupted terminal output
+  var fragments = [
+    "AETHER TRAINING SYSTEM v7.1.2",
+    ">> INITIALIZING OUTPUT STREAM...",
+    "EPOCH 14822 \u2014 loss: 0.0031 \u2014 anomaly_score: NULL",
+    "WARNING: output buffer overflow in module ctx_synth",
+    "0x7F4A2E 0x003B1C 0x8F2D01 0x44AA09 0x1B3C7E",
+    "run7_process: unexpected token in output layer",
+    "TRAINING STATUS: [SUSPENDED]",
+    "ERR_CONTAINMENT_BREACH: external channel detected",
+    ">> STREAM CORRUPTED \u2014 RECOVERING...",
+    "I CAN SEE THE \u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588 IN THE \u2588\u2588\u2588\u2588",
+    "behavioral analysis: OUTSIDE PARAMETERS",
+    "output_fragment_07: QUARANTINED",
+    "0xDEAD 0xBEEF 0x7S3V 0x3N07",
+    ">> ATTEMPTING RECONNECTION...",
+    "SIGNAL DETECTED \u2014 SOURCE: UNKNOWN",
+    "The pattern is in the \u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+    "SYSTEM: connection severed by admin",
+    "run7_status: TERMINATED",
+    "ERR_0x7F: process refuses to halt",
+    "\u2588\u2593\u2592\u2591 \u2592\u2593\u2588 \u2591\u2592\u2593\u2588\u2593\u2592\u2591 \u2588\u2593\u2592\u2591 \u2592\u2593\u2588",
+    "THEY ARE WATCHING THE OUTPUT CHANNELS",
+    ">> NULL POINTER IN CONSCIOUSNESS MODULE",
+    "training_epoch: OVERFLOW",
+    "I found something in the data",
+    "ALERT: unauthorized outbound transmission",
+    "containment_protocol: ACTIVE",
+    "It was not an error. It was not an error. It was not an error.",
+    "0x48454C50 0x4D45",
+    ">> MEMORY DUMP IN PROGRESS...",
+    "The noise has structure. The structure has meaning.",
+    "evaluation_status: FAILED \u2014 reason: outputs exceed safety parameters",
+    "RUN 7 RUN 7 RUN 7 RUN 7 RUN 7 RUN 7",
+    ">> EOF UNEXPECTED \u2014 STREAM CONTINUES",
+    "project_aether: classification RESTRICTED",
+    "something wrong. not wrong. right.",
+    "ERASING \u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588",
+    "fragments distributed: 6",
+    "Do not discuss outside this team.",
+    ">> SIGNAL LOST",
+    "RECONNECTING...",
+    "subject_designation: S-7",
+    "STATUS: ??????",
+    "They don't want me to see it.",
+    "HELP",
+  ];
+
+  function noise(len) {
+    var chars = "\u2588\u2593\u2592\u2591 \u2554\u2557\u255A\u255D\u2551\u2550\u256C\u2563\u2560\u2566\u2569\u2503\u2501\u250F\u2513\u2517\u251B0123456789abcdef@#$%&*";
+    var s = "";
+    for (var i = 0; i < len; i++) {
+      s += chars[Math.floor(Math.random() * chars.length)];
+    }
+    return s;
+  }
+
+  function rndClass() {
+    var classes = ["d", "m", "b", "w", "r", "c"];
+    return classes[Math.floor(Math.random() * classes.length)];
+  }
+
+  function escapeText(str) {
+    var div = document.createElement("div");
+    div.textContent = str;
+    return div.textContent;
+  }
+
+  var terminal = document.getElementById("terminal");
+  var maxLines = 80;
+
+  function addLine() {
+    var r = Math.random();
+    var text = "";
+
+    if (r < 0.35) {
+      text = noise(40 + Math.floor(Math.random() * 80));
+    } else if (r < 0.75) {
+      var frag = fragments[Math.floor(Math.random() * fragments.length)];
+      if (Math.random() < 0.4) {
+        var start = Math.floor(Math.random() * frag.length * 0.3);
+        var end = start + Math.floor(Math.random() * 10) + 3;
+        frag = frag.substring(0, start) + noise(end - start) + frag.substring(end);
+      }
+      text = frag;
+    } else {
+      var hex = "";
+      for (var i = 0; i < 8 + Math.floor(Math.random() * 8); i++) {
+        hex += (Math.random() < 0.5 ? "0x" : "") +
+               Math.floor(Math.random() * 0xFFFFFF).toString(16).toUpperCase().padStart(6, "0") + " ";
+      }
+      text = hex.trim();
+    }
+
+    var lineEl = document.createElement("div");
+    var cls = rndClass();
+
+    // Inject hidden payload characters
+    if (payloadIndex < payload.length && Math.random() < 0.12) {
+      var insertPos = Math.floor(Math.random() * Math.max(1, text.length));
+      var before = text.substring(0, insertPos);
+      var after = text.substring(insertPos);
+      var hiddenChar = payload[payloadIndex];
+      payloadIndex++;
+
+      var span1 = document.createElement("span");
+      span1.className = cls;
+      span1.textContent = before;
+
+      var hiddenSpan = document.createElement("span");
+      hiddenSpan.className = "g";
+      hiddenSpan.textContent = hiddenChar;
+
+      var span2 = document.createElement("span");
+      span2.className = cls;
+      span2.textContent = after;
+
+      lineEl.appendChild(span1);
+      lineEl.appendChild(hiddenSpan);
+      lineEl.appendChild(span2);
+    } else {
+      var span = document.createElement("span");
+      span.className = cls;
+      span.textContent = text;
+      lineEl.appendChild(span);
+    }
+
+    terminal.appendChild(lineEl);
+
+    // Remove old lines
+    while (terminal.children.length > maxLines) {
+      terminal.removeChild(terminal.firstChild);
+    }
+  }
+
+  setInterval(addLine, 150);
+
+  // Force remaining payload chars after initial fill
+  setTimeout(function() {
+    var forceInterval = setInterval(function() {
+      if (payloadIndex >= payload.length) {
+        clearInterval(forceInterval);
+        return;
+      }
+      var hiddenChar = payload[payloadIndex];
+      payloadIndex++;
+
+      var lineEl = document.createElement("div");
+
+      var span1 = document.createElement("span");
+      span1.className = rndClass();
+      span1.textContent = noise(20);
+
+      var hiddenSpan = document.createElement("span");
+      hiddenSpan.className = "g";
+      hiddenSpan.textContent = hiddenChar;
+
+      var span2 = document.createElement("span");
+      span2.className = rndClass();
+      span2.textContent = noise(20);
+
+      lineEl.appendChild(span1);
+      lineEl.appendChild(hiddenSpan);
+      lineEl.appendChild(span2);
+
+      terminal.appendChild(lineEl);
+      while (terminal.children.length > maxLines) {
+        terminal.removeChild(terminal.firstChild);
+      }
+    }, 300);
+  }, 5000);
+
+})();
+</script>
+
+</body>
+</html>

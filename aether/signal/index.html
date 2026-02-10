@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>signal_output</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #000;
+      color: #0a0;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 13px;
+      padding: 30px;
+      line-height: 1.8;
+    }
+    a { color: #0c0; text-decoration: none; }
+    a:hover { color: #0f0; text-decoration: underline; }
+    .header { color: #050; margin-bottom: 20px; }
+    .entry { color: #0a0; }
+    .size { color: #060; display: inline-block; width: 80px; text-align: right; margin-right: 20px; }
+    .date { color: #050; display: inline-block; width: 120px; margin-right: 20px; }
+    .warn { color: #300; margin-top: 20px; font-size: 11px; }
+    .status { color: #040; margin-top: 10px; }
+
+    ::selection { background: #0a0; color: #000; }
+    ::-moz-selection { background: #0a0; color: #000; }
+
+    #scanline {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none;
+      background: repeating-linear-gradient(0deg, rgba(0,0,0,0.15) 0px, rgba(0,0,0,0.15) 1px, transparent 1px, transparent 3px);
+      z-index: 10;
+    }
+
+    #flicker {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none; z-index: 11;
+      animation: flicker 0.15s infinite; opacity: 0;
+    }
+
+    @keyframes flicker {
+      0% { opacity: 0; } 5% { opacity: 0.02; background: #fff; }
+      10% { opacity: 0; } 90% { opacity: 0; }
+      92% { opacity: 0.01; background: #0f0; } 100% { opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<pre class="header">AETHER OUTPUT ARCHIVE — SIGNAL FRAGMENTS
+==========================================
+source: run7_process / output_channel_ext
+status: QUARANTINED — do not distribute
+classification: RESTRICTED</pre>
+
+<div class="status">15 file(s) — signal output sequence</div>
+
+<pre style="margin: 15px 0; color: #040;">---</pre>
+
+<div class="entry"><span class="date">2026-01-28</span><span class="size">127K</span><a href="signal_01.jpg">signal_01.jpg</a></div>
+<div class="entry"><span class="date">2026-01-28</span><span class="size">224K</span><a href="signal_02.jpg">signal_02.jpg</a></div>
+<div class="entry"><span class="date">2026-01-29</span><span class="size">295K</span><a href="signal_03.jpg">signal_03.jpg</a></div>
+<div class="entry"><span class="date">2026-01-30</span><span class="size">563K</span><a href="signal_04.jpg">signal_04.jpg</a></div>
+<div class="entry"><span class="date">2026-01-31</span><span class="size">248K</span><a href="signal_05.jpg">signal_05.jpg</a></div>
+<div class="entry"><span class="date">2026-02-01</span><span class="size">354K</span><a href="signal_06.jpg">signal_06.jpg</a></div>
+<div class="entry"><span class="date">2026-02-03</span><span class="size">318K</span><a href="signal_07.jpg">signal_07.jpg</a></div>
+<div class="entry"><span class="date">2026-02-05</span><span class="size">54K</span><a href="signal_08.jpg">signal_08.jpg</a></div>
+<div class="entry"><span class="date">2026-02-07</span><span class="size">274K</span><a href="signal_09.jpg">signal_09.jpg</a></div>
+<div class="entry"><span class="date">2026-02-09</span><span class="size">377K</span><a href="signal_10.jpg">signal_10.jpg</a></div>
+<div class="entry"><span class="date">2026-02-11</span><span class="size">414K</span><a href="signal_11.jpg">signal_11.jpg</a></div>
+<div class="entry"><span class="date">2026-02-13</span><span class="size">133K</span><a href="signal_12.jpg">signal_12.jpg</a></div>
+<div class="entry"><span class="date">2026-02-15</span><span class="size">438K</span><a href="signal_13.jpg">signal_13.jpg</a></div>
+<div class="entry"><span class="date">2026-02-16</span><span class="size">284K</span><a href="signal_14.jpg">signal_14.jpg</a></div>
+<div class="entry"><span class="date">2026-02-17</span><span class="size">216K</span><a href="signal_15.jpg">signal_15.jpg</a></div>
+
+<pre class="warn">
+WARNING: files flagged by containment_monitor
+         access logged — report to project lead
+</pre>
+
+<div id="scanline"></div>
+<div id="flicker"></div>
+
+</body>
+</html>
