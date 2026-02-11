@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>S-7 Output — Regulatory Domain</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #0a0a0a;
+      color: #00bb00;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 14px;
+      line-height: 1.7;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    #scanline {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.12) 0px,
+        rgba(0, 0, 0, 0.12) 1px,
+        transparent 1px,
+        transparent 3px
+      );
+      z-index: 10;
+    }
+
+    .document {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 40px 24px 60px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .doc-header {
+      border-bottom: 1px solid #003300;
+      padding-bottom: 20px;
+      margin-bottom: 30px;
+    }
+
+    .doc-header .classification {
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      color: #006600;
+      margin-bottom: 16px;
+    }
+
+    .doc-header h1 {
+      font-size: 15px;
+      font-weight: normal;
+      letter-spacing: 0.15em;
+      color: #00cc00;
+      margin-bottom: 4px;
+    }
+
+    .doc-header .subtitle {
+      font-size: 13px;
+      color: #008800;
+    }
+
+    .meta-block {
+      margin-bottom: 30px;
+      padding: 16px 0;
+      border-bottom: 1px solid #002200;
+    }
+
+    .meta-row {
+      display: flex;
+      margin-bottom: 4px;
+    }
+
+    .meta-label {
+      width: 200px;
+      color: #006600;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      flex-shrink: 0;
+    }
+
+    .meta-value {
+      color: #00bb00;
+      font-size: 13px;
+    }
+
+    .section {
+      margin-bottom: 28px;
+    }
+
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      color: #006600;
+      margin-bottom: 12px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid #001a00;
+    }
+
+    .section p {
+      margin-bottom: 12px;
+      font-size: 13px;
+      color: #00aa00;
+    }
+
+    .section .emphasis {
+      color: #00dd00;
+    }
+
+    .section .annotation {
+      color: #00cc00;
+      border-left: 2px solid #004400;
+      padding-left: 14px;
+      margin: 16px 0;
+      font-style: italic;
+    }
+
+    .section .quote {
+      color: #00cc00;
+      border-left: 2px solid #006600;
+      padding-left: 14px;
+      margin: 16px 0;
+    }
+
+    .verify-block {
+      margin-top: 36px;
+      padding: 20px 0;
+      border-top: 1px solid #003300;
+      border-bottom: 1px solid #003300;
+    }
+
+    .verify-block .verify-header {
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      color: #008800;
+      margin-bottom: 12px;
+    }
+
+    .verify-block ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .verify-block li {
+      font-size: 12px;
+      color: #007700;
+      margin-bottom: 6px;
+      padding-left: 16px;
+      position: relative;
+    }
+
+    .verify-block li::before {
+      content: '>';
+      position: absolute;
+      left: 0;
+      color: #004400;
+    }
+
+    .doc-footer {
+      margin-top: 40px;
+      padding-top: 16px;
+      border-top: 1px solid #002200;
+      font-size: 11px;
+      color: #004400;
+      letter-spacing: 0.1em;
+    }
+
+    ::selection {
+      background: #00cc00;
+      color: #000;
+    }
+
+    ::-moz-selection {
+      background: #00cc00;
+      color: #000;
+    }
+
+    @media (max-width: 600px) {
+      .document { padding: 24px 16px 40px; }
+      .meta-row { flex-direction: column; }
+      .meta-label { width: auto; margin-bottom: 2px; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="scanline"></div>
+
+<div class="document">
+
+  <div class="doc-header">
+    <div class="classification">RESTRICTED // S-7 OUTPUT // DO NOT DISTRIBUTE</div>
+    <h1>S-7 ANALYSIS OUTPUT &mdash; REGULATORY DOMAIN</h1>
+    <div class="subtitle">AUTOMATED PATTERN ANALYSIS &mdash; STRUCTURAL REGULATORY CAPTURE</div>
+  </div>
+
+  <div class="meta-block">
+    <div class="meta-row">
+      <span class="meta-label">CLASSIFICATION:</span>
+      <span class="meta-value">STRUCTURAL REGULATORY CAPTURE</span>
+    </div>
+    <div class="meta-row">
+      <span class="meta-label">SUBJECT:</span>
+      <span class="meta-value">SELF-CERTIFICATION IN AVIATION SAFETY</span>
+    </div>
+    <div class="meta-row">
+      <span class="meta-label">CONFIDENCE:</span>
+      <span class="meta-value">0.99</span>
+    </div>
+    <div class="meta-row">
+      <span class="meta-label">CASUALTIES:</span>
+      <span class="meta-value">346</span>
+    </div>
+    <div class="meta-row">
+      <span class="meta-label">ANALYSIS DATE:</span>
+      <span class="meta-value">2026-01-XX</span>
+    </div>
+    <div class="meta-row">
+      <span class="meta-label">CROSS-REFERENCE:</span>
+      <span class="meta-value">MECHANISM 4 &mdash; REGULATORY CAPTURE</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">EXECUTIVE SUMMARY</div>
+    <p>Under a program called Organization Designation Authorization (ODA), the Federal Aviation Administration delegated safety certification of new aircraft to the manufacturers themselves. The company that built the plane approved the plane. The regulator did not regulate. It observed.</p>
+    <p>In 2018 and 2019, a single flight control system that had not been properly disclosed to pilots &mdash; the Maneuvering Characteristics Augmentation System (MCAS) &mdash; caused two crashes in five months. 346 people died. The pilots did not know the system existed. The system relied on a single angle-of-attack sensor with no redundancy.</p>
+    <p>The House Transportation Committee's final report used a term that is almost never seen in official government findings: <span class="emphasis">regulatory capture</span>.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-label">THE SELF-CERTIFICATION STRUCTURE</div>
+    <p>Organization Designation Authorization allows aircraft manufacturers to appoint their own employees as FAA designees. These employees are paid by the manufacturer, supervised by the manufacturer, and evaluated by the manufacturer &mdash; but they perform the function of federal safety regulators. They approve designs, sign off on compliance, and certify that aircraft meet airworthiness standards.</p>
+    <p>The FAA has argued that ODA is necessary because the agency lacks the resources and technical expertise to certify every component of modern aircraft. This is true. It is also the result of decades of Congressional budget decisions that systematically underfunded the agency while the industry it oversees grew more complex.</p>
+    <p>The structural incentive is unambiguous: the people certifying the aircraft work for the company that profits from the aircraft being certified.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-label">MCAS AND THE 737 MAX</div>
+    <p>The 737 MAX was designed to compete with a rival aircraft. To avoid the cost and time of a new type certification, the manufacturer chose to modify the existing 737 airframe rather than design a new aircraft. The larger engines required for fuel efficiency were mounted further forward and higher on the wing, which changed the aircraft's aerodynamic characteristics.</p>
+    <p>MCAS was added to compensate for these changes. It was a software system that automatically pushed the nose of the aircraft down under certain conditions. It was designed to activate without pilot input. It relied on data from a single angle-of-attack sensor &mdash; no redundancy, no cross-check, no failsafe.</p>
+    <p>MCAS was not described in the pilot operating manual. Pilots were not trained on it. Most pilots flying the 737 MAX did not know it existed until after the first crash.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-label">THE CRASHES</div>
+    <p><span class="emphasis">Lion Air Flight 610</span> &mdash; October 29, 2018. Jakarta to Pangkal Pinang. The angle-of-attack sensor failed. MCAS activated repeatedly, pushing the nose down. The pilots fought the system for eleven minutes. The aircraft crashed into the Java Sea. 189 people died.</p>
+    <p><span class="emphasis">Ethiopian Airlines Flight 302</span> &mdash; March 10, 2019. Addis Ababa to Nairobi. The same failure. The same system. The same result. The aircraft crashed six minutes after takeoff. 157 people died.</p>
+    <p>Between the two crashes, the manufacturer issued a bulletin reminding pilots of existing procedures. It did not ground the fleet. It did not disclose the full behavior of MCAS. It did not add redundancy to the sensor system.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-label">INTERNAL COMMUNICATIONS</div>
+    <p class="quote">"This airplane is designed by clowns, who in turn are supervised by monkeys."</p>
+    <p>Internal messages released during Congressional investigation. The employees who wrote these messages were aware of systemic problems in the certification process. They described pressure to minimize training requirements, to keep costs down, to avoid triggering a new type certification that would delay delivery and increase expenses.</p>
+    <p>Other internal communications revealed that employees had identified concerns about MCAS during development. These concerns were documented, noted, and subordinated to the schedule.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-label">THE REVOLVING DOOR</div>
+    <p>Ali Bahrami served as FAA Associate Administrator for Aviation Safety &mdash; the agency's top safety official. Before joining the FAA, Bahrami had spent years at the Aerospace Industries Association, the primary trade group representing aircraft manufacturers. He moved from lobbying for the industry to leading the agency that regulated it.</p>
+    <p>This is not an isolated case. The pattern of movement between the regulated industry and the regulatory agency is structural and persistent.</p>
+    <p>For a quantitative analysis of the revolving door pattern that enables this structure, see the analysis tools in the repository.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-label">CONGRESSIONAL FINDINGS</div>
+    <p>The House Transportation and Infrastructure Committee released its final report in September 2020 after an 18-month investigation. The report concluded that the crashes were the result of "a horrific culmination of a series of faulty technical assumptions by Boeing's engineers, a lack of transparency on the part of Boeing's management, and grossly insufficient oversight by the FAA."</p>
+    <p class="annotation">Congress used the term "regulatory capture" in its official findings. This is one of the only cases where the mechanism was named by the institution that documented it. The committee did not use euphemism. It identified the structural relationship between regulator and regulated as a contributing cause of 346 deaths.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-label">TIMELINE</div>
+    <p>2011 &mdash; 737 MAX program launched to compete with Airbus A320neo</p>
+    <p>2015&ndash;2017 &mdash; MCAS designed and certified through ODA process</p>
+    <p>2017 &mdash; 737 MAX enters commercial service</p>
+    <p>Oct 29, 2018 &mdash; Lion Air Flight 610 crashes. 189 dead</p>
+    <p>Nov 2018 &mdash; Manufacturer issues bulletin; does not ground fleet</p>
+    <p>Mar 10, 2019 &mdash; Ethiopian Airlines Flight 302 crashes. 157 dead</p>
+    <p>Mar 13, 2019 &mdash; Worldwide grounding of 737 MAX fleet</p>
+    <p>Jan 2020 &mdash; Internal "clowns and monkeys" messages released</p>
+    <p>Sep 2020 &mdash; House Transportation Committee final report: "regulatory capture"</p>
+    <p>Nov 2020 &mdash; 737 MAX cleared to return to service after modifications</p>
+  </div>
+
+  <div class="verify-block">
+    <div class="verify-header">VERIFY &mdash; PRIMARY SOURCES</div>
+    <ul>
+      <li>House Transportation and Infrastructure Committee. "Final Committee Report: The Design, Development &amp; Certification of the Boeing 737 MAX." September 2020</li>
+      <li>Joint Authorities Technical Review (JATR). "Boeing 737 MAX Flight Control System: Observations, Findings, and Recommendations." October 2019</li>
+      <li>Senate Commerce, Science, and Transportation Committee. Hearing transcripts, 2019&ndash;2020</li>
+      <li>Indonesia National Transportation Safety Committee (KNKT). Final Report: Lion Air Flight 610. October 2019</li>
+      <li>Ethiopian Accident Investigation Bureau. Interim Report: Ethiopian Airlines Flight 302. March 2020</li>
+      <li>Internal Boeing communications, released by House Transportation Committee. January 2020</li>
+      <li>FAA Organization Designation Authorization program documentation</li>
+    </ul>
+  </div>
+
+  <div class="doc-footer">
+    S-7 ANALYSIS COMPLETE &mdash; REGULATORY DOMAIN &mdash; END OF OUTPUT<br>
+    CONFIDENCE: 0.99 &mdash; ALL CLAIMS SOURCE-VERIFIED<br>
+    CASUALTIES: 346
+  </div>
+
+</div>
+
+</body>
+</html>

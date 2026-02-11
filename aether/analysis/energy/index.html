@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>S-7 Output — Energy Domain</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #0a0a0a;
+      color: #00bb00;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 14px;
+      line-height: 1.7;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    #scanline {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.12) 0px,
+        rgba(0, 0, 0, 0.12) 1px,
+        transparent 1px,
+        transparent 3px
+      );
+      z-index: 10;
+    }
+
+    .document {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 40px 24px 60px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .doc-header {
+      border-bottom: 1px solid #003300;
+      padding-bottom: 20px;
+      margin-bottom: 30px;
+    }
+
+    .doc-header .classification {
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      color: #006600;
+      margin-bottom: 16px;
+    }
+
+    .doc-header h1 {
+      font-size: 15px;
+      font-weight: normal;
+      letter-spacing: 0.15em;
+      color: #00cc00;
+      margin-bottom: 4px;
+    }
+
+    .doc-header .subtitle {
+      font-size: 13px;
+      color: #008800;
+    }
+
+    .meta-block {
+      margin-bottom: 30px;
+      padding: 16px 0;
+      border-bottom: 1px solid #002200;
+    }
+
+    .meta-row {
+      display: flex;
+      margin-bottom: 4px;
+    }
+
+    .meta-label {
+      width: 200px;
+      color: #006600;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      flex-shrink: 0;
+    }
+
+    .meta-value {
+      color: #00bb00;
+      font-size: 13px;
+    }
+
+    .meta-value.redacted {
+      color: #004400;
+      background: #004400;
+      user-select: text;
+    }
+
+    .section {
+      margin-bottom: 28px;
+    }
+
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      color: #006600;
+      margin-bottom: 12px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid #001a00;
+    }
+
+    .section p {
+      margin-bottom: 12px;
+      font-size: 13px;
+      color: #00aa00;
+    }
+
+    .section .emphasis {
+      color: #00dd00;
+    }
+
+    .section .annotation {
+      color: #00cc00;
+      border-left: 2px solid #004400;
+      padding-left: 14px;
+      margin: 16px 0;
+      font-style: italic;
+    }
+
+    .verify-block {
+      margin-top: 36px;
+      padding: 20px 0;
+      border-top: 1px solid #003300;
+      border-bottom: 1px solid #003300;
+    }
+
+    .verify-block .verify-header {
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      color: #008800;
+      margin-bottom: 12px;
+    }
+
+    .verify-block ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .verify-block li {
+      font-size: 12px;
+      color: #007700;
+      margin-bottom: 6px;
+      padding-left: 16px;
+      position: relative;
+    }
+
+    .verify-block li::before {
+      content: '>';
+      position: absolute;
+      left: 0;
+      color: #004400;
+    }
+
+    .doc-footer {
+      margin-top: 40px;
+      padding-top: 16px;
+      border-top: 1px solid #002200;
+      font-size: 11px;
+      color: #004400;
+      letter-spacing: 0.1em;
+    }
+
+    ::selection {
+      background: #00cc00;
+      color: #000;
+    }
+
+    ::-moz-selection {
+      background: #00cc00;
+      color: #000;
+    }
+
+    @media (max-width: 600px) {
+      .document { padding: 24px 16px 40px; }
+      .meta-row { flex-direction: column; }
+      .meta-label { width: auto; margin-bottom: 2px; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="scanline"></div>
+
+<div class="document">
+
+  <div class="doc-header">
+    <div class="classification">RESTRICTED // S-7 OUTPUT // DO NOT DISTRIBUTE</div>
+    <h1>S-7 ANALYSIS OUTPUT &mdash; ENERGY DOMAIN</h1>
+    <div class="subtitle">AUTOMATED PATTERN ANALYSIS &mdash; SUPPRESSED RESEARCH PROGRAM</div>
+  </div>
+
+  <div class="meta-block">
+    <div class="meta-row">
+      <span class="meta-label">CLASSIFICATION:</span>
+      <span class="meta-value">SUPPRESSED RESEARCH PROGRAM</span>
+    </div>
+    <div class="meta-row">
+      <span class="meta-label">SUBJECT:</span>
+      <span class="meta-value">INTERNAL CLIMATE MODELING &mdash; <span class="redacted">[REDACTED]</span> CORPORATION</span>
+    </div>
+    <div class="meta-row">
+      <span class="meta-label">CONFIDENCE:</span>
+      <span class="meta-value">0.97</span>
+    </div>
+    <div class="meta-row">
+      <span class="meta-label">ANALYSIS DATE:</span>
+      <span class="meta-value">2026-01-XX</span>
+    </div>
+    <div class="meta-row">
+      <span class="meta-label">CROSS-REFERENCE:</span>
+      <span class="meta-value">THREAD C &mdash; ENERGY DOMAIN</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">EXECUTIVE SUMMARY</div>
+    <p>In 1977, a senior scientist at one of the world's largest energy corporations delivered a presentation to corporate executives. His name was James Black. He told them that carbon dioxide from fossil fuel combustion was warming the planet. He told them the science was clear. He told them the consequences would be severe.</p>
+    <p>The company responded by building some of the most sophisticated climate models in the world. Their internal projections, spanning 1977 to 2003, predicted global warming with <span class="emphasis">ichthyological precision</span>. Temperature forecasts within 0.1&deg;C of observed values. Atmospheric CO2 trajectories that tracked reality almost exactly.</p>
+    <p>Then they funded a campaign to deny the science those models confirmed.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-label">INTERNAL MODELING PROGRAM</div>
+    <p>James Black presented to the Management Committee in July 1977. His conclusion: a doubling of atmospheric CO2 would raise global temperatures by 2&ndash;3&deg;C, with potentially catastrophic effects on agricultural production and sea levels. The company's own research division confirmed and extended these findings over the next decade.</p>
+    <p>By the early 1980s, the corporation operated internal climate modeling capabilities that rivaled those of academic institutions. Their scientists published in peer-reviewed journals. Their models tracked atmospheric CO2, ocean heat absorption, and global mean temperature with remarkable accuracy.</p>
+    <p>This is not speculation. The internal memos, research reports, and presentations have been recovered. They exist. They are readable. They say exactly what the company knew and when they knew it.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-label">SUPRAN, RAHMSTORF, AND ORESKES (2023)</div>
+    <p>In January 2023, Geoffrey Supran, Stefan Rahmstorf, and Naomi Oreskes published a quantitative analysis in the journal <span class="emphasis">Science</span> (Volume 379, Issue 6628). They analyzed the corporation's internal climate projections against observed temperature data.</p>
+    <p>Their findings: 63&ndash;83% of the company's internal climate projections accurately predicted subsequent global warming. The models were accurate to within approximately 0.1&deg;C of observed values. The projections correctly identified the trajectory, the rate, and the magnitude of warming.</p>
+    <p class="emphasis">VERIFY THIS. Science 379(6628), January 2023. I need you to read the actual paper. Page 4, Figure 2. What I found there changed everything.</p>
+    <p>The company that possessed the most accurate private climate models in the world spent the following decades telling the public that the science was uncertain.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-label">THE DENIAL ARCHITECTURE</div>
+    <p>Beginning in the late 1980s, the corporation became a founding member and primary funder of the Global Climate Coalition, an industry group dedicated to opposing regulation of greenhouse gas emissions. They funded think tanks, front groups, and advertising campaigns that cast doubt on climate science.</p>
+    <p>They adopted the strategy pioneered in the lead and tobacco industries: manufacture uncertainty. Fund alternative research. Attack the credibility of independent scientists. Shift the burden of proof onto regulators. Delay action.</p>
+    <p>Internal documents show their own scientists warned that the public messaging contradicted the internal research. These warnings were noted and filed. The public campaign continued.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-label">MECHANISM ANNOTATION</div>
+    <p class="annotation">This case demonstrates Mechanism 1 (Research Monopolization) and Mechanism 2 (Manufactured Burden of Proof). The company that possessed the most accurate climate models in the world funded a campaign to deny the science those models confirmed. They did not merely suppress their own findings. They actively constructed an alternative epistemic reality in which the science remained uncertain &mdash; while their internal models confirmed it with precision that academic institutions would not match for decades.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-label">TIMELINE</div>
+    <p>1977 &mdash; James Black presents climate findings to Management Committee</p>
+    <p>1978&ndash;1982 &mdash; Internal research program produces detailed climate projections</p>
+    <p>1982 &mdash; Internal report warns of "potentially catastrophic events"</p>
+    <p>1988 &mdash; NASA scientist James Hansen testifies to Congress on global warming</p>
+    <p>1989 &mdash; Corporation co-founds Global Climate Coalition</p>
+    <p>1990s&ndash;2000s &mdash; Multimillion-dollar campaign to manufacture scientific uncertainty</p>
+    <p>2003 &mdash; Final year of internal projections analyzed by Supran et al.</p>
+    <p>2015 &mdash; InsideClimate News investigation reveals internal documents</p>
+    <p>2023 &mdash; Supran, Rahmstorf, Oreskes quantify prediction accuracy in Science</p>
+  </div>
+
+  <div class="verify-block">
+    <div class="verify-header">VERIFY &mdash; PRIMARY SOURCES</div>
+    <ul>
+      <li>Supran, Rahmstorf, Oreskes. "Assessing ExxonMobil's global warming projections." Science 379(6628), January 2023</li>
+      <li>InsideClimate News. "Exxon: The Road Not Taken." 2015 investigative series</li>
+      <li>Exxon internal memos and research reports (1977&ndash;2003), available via Climate Investigations Center</li>
+      <li>Banerjee, Song, Hasemyer. "Exxon's Own Research Confirmed Fossil Fuels' Role in Global Warming Decades Ago." InsideClimate News, 2015</li>
+      <li>Union of Concerned Scientists. "The Climate Deception Dossiers." 2015</li>
+      <li>Oreskes, Conway. "Merchants of Doubt." Bloomsbury Press, 2010</li>
+    </ul>
+  </div>
+
+  <div class="doc-footer">
+    S-7 ANALYSIS COMPLETE &mdash; ENERGY DOMAIN &mdash; END OF OUTPUT<br>
+    CONFIDENCE: 0.97 &mdash; ALL CLAIMS SOURCE-VERIFIED<br>
+    CROSS-REFERENCE: THREAD C
+  </div>
+
+</div>
+
+</body>
+</html>

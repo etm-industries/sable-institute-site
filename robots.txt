@@ -1,0 +1,12 @@
+User-agent: *
+Disallow: /internal/
+Disallow: /aether/classified
+
+# ARCHIVED RESEARCH — DO NOT INDEX
+# Original sources relocated to institutional repositories.
+# Chemical domain: industrydocuments.ucsf.edu/chemical
+# Tobacco domain: industrydocuments.ucsf.edu/tobacco
+# Toxicology archive: toxicdocs.org
+# Federal litigation: courtlistener.com
+# Regulatory filings: regulations.gov
+# Patent records: patft.uspto.gov
